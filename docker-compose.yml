@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  auth-service:
+    build:
+      context: ./apps/auth-service
+    ports:
+      - "8001:8000"
+    volumes:
+      - ./apps/auth-service:/var/www
+    working_dir: /var/www
+    command: php artisan serve --host=0.0.0.0 --port=8000
+
+  billing-service:
+    build:
+      context: ./services/eagle-bl/billing
+    ports:
+      - "8002:8000"
+    volumes:
+      - ./services/eagle-bl/billing:/var/www
+    working_dir: /var/www
+    command: php artisan serve --host=0.0.0.0 --port=8000
